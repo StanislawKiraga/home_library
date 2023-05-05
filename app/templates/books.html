@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteka</title>
+    <style>
+        table, th, tr, td {border: 3px solid black; text-align: center;}
+        h2 {text-align: center; color: blue;}
+    </style>
+</head>
+
+<h2><em>Lista ksiązek</em></h2>
+
+<table style='margin: auto;'> 
+    <thead>
+    <th>Tytuł</th>  
+    <th>Autor</th>  
+    <th>Opis</th>
+    <th>Przeczytane?</th>
+    </thead>
+{% for book in books %}
+    <tr>
+        <td><a href="/books/{{ loop.index }}">{{ book.title }}</a></td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.description }}</td>
+        <td>{{ book.read }}</td>
+    </tr>
+{% endfor %}
+</table>
+<div>
+    <h2> Dodaj nową ksiązke: </h2>
+    <form method="POST" action="/books/">
+        {{ form.hidden_tag() }}
+        <table style='margin: auto;'>        
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+        </table><br>
+        <div align='center'>
+            <button type="submit" class='btn btn-primary' 
+                    style="height:30px;width:50px;background-color:antiquewhite">GO!</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
