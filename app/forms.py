@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, BooleanField
+from wtforms import StringField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 
 
 class BookForm(FlaskForm):
-    title = StringField('Tytuł', validators=[DataRequired()])
-    author = StringField('Autor', validators=[DataRequired()])
-    borrowed = StringField('Pozyczona?', validators=[DataRequired()])
-    read = BooleanField('Przeczytane?') 
+    title = StringField('Title', validators=[DataRequired()])
+    author = StringField('Author', validators=[DataRequired()])
+    read = BooleanField('Read?')
+    borrowed = BooleanField('Borrowed?')
