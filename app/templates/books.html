@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Biblioteka</title>
     <style>
-        table, th, tr, td {border: 3px solid black; text-align: center;}
-        h2 {text-align: center; color: blue;}
+        table, th, tr, td {border: 3px solid black; text-align: center}
+        h2 {text-align: center; color: blue}
     </style>
 </head>
 
@@ -13,17 +13,19 @@
 
 <table style='margin: auto;'> 
     <thead>
+    <th>ID</th>  
     <th>Tytuł</th>  
     <th>Autor</th>  
-    <th>Opis</th>
-    <th>Przeczytane?</th>
+    <th>Przeczytana?</th>  
+    <th>Pozyczona?</th>
     </thead>
-{% for book in books %}
+{% for book in books_list %}
     <tr>
-        <td><a href="/books/{{ loop.index }}">{{ book.title }}</a></td>
+        <td>{{ book.id }}</td>
+        <td><a href="/books/{{ book.id }}">{{ book.title }}</a></td>
         <td>{{ book.author }}</td>
-        <td>{{ book.description }}</td>
         <td>{{ book.read }}</td>
+        <td>{{ book.borrowed }}</td>
     </tr>
 {% endfor %}
 </table>

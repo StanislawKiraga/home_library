@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Szczegóły ksiązki</title>
+    <title>Update book</title>
     <style>
         table, th, tr, td {border: 3px solid black; text-align: center;}
         h2 {text-align: center; color: blue;}
     </style>
 </head>
 <body>
-    <h2> Zmień: </h2>
-    <form method="POST" action="/books/{{ book_id }}/">
+    <h2> Update: </h2>
+    <form method="POST" action="/books/{{ book.id }}">
         {{ form.hidden_tag() }}
         <div align="center">
             <table>
@@ -22,7 +22,13 @@
                 {% endfor %}
             </table>
             <button type="submit" class='btn btn-primary' 
-                    style="height:30px;width:50px;background-color:antiquewhite">GO!</button>
+                    style="height:30px;width:50px;background-color:rgb(95, 175, 66)">GO!</button>
+        </div>
+    </form>
+    <form method="POST" action="/delete_book/{{ book.id }}">
+        <div align="center">
+            <button type="submit" class='btn btn-primary'
+                    style="height:30px;width:70px;background-color:rgb(187, 30, 30)">DELETE!</button>
         </div>
     </form>
 </body>
