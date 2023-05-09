@@ -25,7 +25,8 @@
         <td><a href="/books/{{ book.id }}">{{ book.title }}</a></td>
         <td>{{ book.author }}</td>
         <td>{{ book.read }}</td>
-        <td>{{ book.borrowed }}</td>
+        <td>{% if not book.borrowed %}NO{% endif %}
+            {% if book.borrowed %}YES{% endif %}</td>
     </tr>
 {% endfor %}
 </table>

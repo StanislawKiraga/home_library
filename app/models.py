@@ -5,7 +5,7 @@ class Book(db.Model):
     title = db.Column(db.String(100), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
     read = db.Column(db.Boolean, default=False)
-    borrowed = db.Column(db.Boolean, default=False)
+    borrowed = db.relationship('Borrowed', backref='book', uselist=False)
 
     def __str__(self):
         return f'<Book {self.id}'
@@ -29,6 +29,6 @@ class Borrowed(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
 
     def __str__(self):
-        return f'<Available: {self.available}>'
+        return f'YES'
 
     

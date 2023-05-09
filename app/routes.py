@@ -16,7 +16,11 @@ def home():
             if author is None:
                 author = Author(name=author_name)
                 db.session.add(author)     
-            book = Book(title=form.title.data, author=author, read=form.read.data, borrowed=form.borrowed.data)       
+            book = Book(title=form.title.data, author=author, read=form.read.data, borrowed=None)      
+            if form.borrowed.data:
+                borrowed = Borrowed()
+                db.session.add(borrowed)
+                book.borrowed = borrowed 
             db.session.add(book)
             db.session.commit()
             return redirect(url_for('home'))
@@ -37,14 +41,23 @@ def update(book_id):
                 db.session.add(author)
             book.title = form.title.data
             book.read = form.read.data
-            book.borrowed = form.borrowed.data
+            if form.borrowed.data:
+                if book.borrowed is None:
+                    borrowed = Borrowed()
+                    db.session.add(borrowed)
+                    book.borrowed = borrowed
+            else:
+                if book.borrowed is not None:
+                    db.session.delete(book.borrowed)
+                    book.borrowed = None
+
             db.session.commit()
             return redirect(url_for('home'))
         
     form.title.data = book.title
     form.author.data = book.author.name if book.author else ''
     form.read.data = book.read
-    form.borrowed.data = book.borrowed
+    form.borrowed.data = book.borrowed is not None
 
     return render_template('book.html', form=form, book=book)
 
